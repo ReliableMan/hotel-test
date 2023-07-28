@@ -18,16 +18,20 @@
         </p>
       </div>
         <div class="header__icons-connect">
-          <img 
-            class="icons-img"
-            src="@/assets/icons/telegram.png" 
-            alt="icons-connect-img"
-          >
-          <img 
-            class="icons-img"
-            src="@/assets/icons/whatsapp.png" 
-            alt="icons-connect-img"
-          >
+          <a target="_blank" href="https://t.me/relax_tonight">
+            <img 
+              class="icons-img"
+              src="@/assets/icons/telegram.png" 
+              alt="icons-connect-img"
+            >
+          </a>
+          <a target="_blank" href="https://wa.me/8123465789">
+            <img 
+              class="icons-img"
+              src="@/assets/icons/whatsapp.png" 
+              alt="icons-connect-img"
+            >
+          </a>
         </div>
           <div class="header__info">
             <p class="number-size"> +7 (123) 45-67-89</p>
@@ -52,10 +56,10 @@
 .header {
   margin: 12px 166px 40px 167px;
   display: flex;
-  width: 100%;
+  // width: 100%;
 
   &__logo {
-    width: 40%
+    width: 50%
   }
   
   &__location {
