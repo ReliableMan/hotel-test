@@ -1,3 +1,7 @@
+<script setup>
+import Tabs from './Tabs.vue'
+</script>
+
 <template>
   <div class="header">
     <div class="header__logo">
@@ -42,6 +46,8 @@
           </div>
 
   </div>
+
+  <Tabs/>
 
 </template>
 
@@ -102,6 +108,7 @@
 }
 .number-size {
   @extend .text-style-1;
+  width: 164px;
 }
 .number-href {
   margin-left: 37px;
