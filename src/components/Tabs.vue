@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted } from 'vue';
+import CostCalculation from './Tabs_components/CostCalculation.vue';
 
 onMounted(() => {
   const tabsHref = document.querySelectorAll(".tabs__nav-btn");
@@ -42,7 +43,7 @@ onMounted(() => {
     <div class="tabs__content ">
       <!-- 1 -->
       <div class="tabs__item active" id="tab_1">
-        <h3>Рассчитайте стоимость вашего банкета</h3>
+        <CostCalculation/>
       </div>
       <!-- 2 -->
       <div class="tabs__item" id="tab_2">
@@ -97,6 +98,7 @@ onMounted(() => {
     @extend .custom-underline;
     background-size: 0% 2px;
     transition: background-size .7s, color .7s;
+    font-family: 'Lato', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;

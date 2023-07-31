@@ -3,57 +3,68 @@ import Tabs from './Tabs.vue'
 </script>
 
 <template>
-  <div class="header">
-    <div class="header__logo">
-      <img
-        class="logo-img" 
-        src="@/assets/icons/header-logo.png"
-        alt="img-logo"
-      >
-    </div>
-      <div class="header__location">
-        <img 
-          class="header__location-img"
-          src="@/assets/icons/Map_Pin.png"
-          alt="img-map-pin"
+  <div class="container">
+    <div class="header">
+      <div class="header__logo">
+        <img
+          class="logo-img" 
+          src="@/assets/icons/header-logo.png"
+          alt="img-logo"
         >
-        <p class="header__location-text">
-          г. Ставрополь,<br/>ул. Пушкина 272
-        </p>
       </div>
-        <div class="header__icons-connect">
-          <a target="_blank" href="https://t.me/relax_tonight">
-            <img 
-              class="icons-img"
-              src="@/assets/icons/telegram.png" 
-              alt="icons-connect-img"
-            >
-          </a>
-          <a target="_blank" href="https://wa.me/8123465789">
-            <img 
-              class="icons-img"
-              src="@/assets/icons/whatsapp.png" 
-              alt="icons-connect-img"
-            >
-          </a>
+        <div class="header__location">
+          <img 
+            class="header__location-img"
+            src="@/assets/icons/Map_Pin.png"
+            alt="img-map-pin"
+          >
+          <p class="header__location-text">
+            г. Ставрополь,<br/>ул. Пушкина 272
+          </p>
         </div>
-          <div class="header__info">
-            <p class="number-size"> +7 (123) 45-67-89</p>
-            <a 
-              class="number-href"
-              href="tel:+7123456789">Перезвоните мне
+          <div class="header__icons-connect">
+            <a target="_blank" href="https://t.me/relax_tonight">
+              <img 
+                class="icons-img"
+                src="@/assets/icons/telegram.png" 
+                alt="icons-connect-img"
+              >
+            </a>
+            <a target="_blank" href="https://wa.me/8123465789">
+              <img 
+                class="icons-img"
+                src="@/assets/icons/whatsapp.png" 
+                alt="icons-connect-img"
+              >
             </a>
           </div>
+            <div class="header__info">
+              <p class="number-size"> +7 (123) 45-67-89</p>
+              <a 
+                class="number-href"
+                href="tel:+7123456789">Перезвоните мне
+              </a>
+            </div>
 
-  </div>
-
-  <Tabs/>
-
+          </div>
+          
+          <Tabs/>
+      </div>
 </template>
 
 <style lang="scss" scoped>
+.container {
+  width: auto;
+  height: 142px;
+  border-radius: 0px 0px 16px 16px;
+  border: 1px solid var(--ver-20, #F7F7F8);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(16px);
+}
 
 .text-style-1 {
+  font-family: 'Lato', sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -62,7 +73,6 @@ import Tabs from './Tabs.vue'
 .header {
   margin: 12px 166px 40px 167px;
   display: flex;
-  // width: 100%;
 
   &__logo {
     width: 50%
@@ -112,8 +122,8 @@ import Tabs from './Tabs.vue'
 }
 .number-href {
   margin-left: 37px;
-  color: var(--ver-20, #C6AF66);
-  font-family: Roboto;
+  color:  #C6AF66;
+  font-family: 'Roboto', sans-serif;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
