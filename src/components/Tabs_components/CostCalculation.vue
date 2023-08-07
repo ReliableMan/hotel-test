@@ -27,10 +27,17 @@ onMounted(() => {
 const nextBtn = ref(false);
 const count = ref(0)
 
-function visibleNextBtn () {
+function visibleNextBtn() {
   nextBtn.value = true;
-  console.log(nextBtn.value)
+  // write script if quiz will finished
+  count.value <= 3 ? count.value ++ : ''; 
+  
 }
+
+function prevStepBtn() {
+  count.value !== 0 ? count.value -- : nextBtn.value = false; 
+  
+} 
 // загатовочка, если не нажали вариант ответа
 function showAlert() {
   Swal.fire({
@@ -86,6 +93,7 @@ function showAlert() {
                 <!-- Кнопка назад -->
                 <transition name="custom">
                     <div 
+                      @click="prevStepBtn"
                       v-if="nextBtn" 
                       class="btn-img-left cost-calc__container__block1__content__btn2 ">
                         <p class="cost-calc__container__block1__content__btn2__text">
