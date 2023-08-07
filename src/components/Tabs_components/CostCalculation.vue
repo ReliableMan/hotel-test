@@ -1,17 +1,45 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import Swal from 'sweetalert2';
+
+import questions from '../questions.js'
+
 
 onMounted(() => {
   const radioBtns = document.querySelectorAll('input[name="answer"]');
+  const parentElems = document.querySelectorAll('.form_radio');
   
   radioBtns.forEach(function(elem) {
     elem.addEventListener('change', (elem) => {
       const el = elem.target.closest('.form_radio');
-// think about logic add and remove class on elements
-        !el.classList.contains('active') ? el.classList.add('active') : el.classList.remove('active');
+
+      parentElems.forEach(function(elem) {
+        elem.classList.remove('active');
+      })
+
+      el.classList.contains('active') ? 
+      el.classList.remove('active') : 
+      el.classList.add('active');
     })
   })
 })
+
+const nextBtn = ref(false);
+const count = ref(0)
+
+function visibleNextBtn () {
+  nextBtn.value = true;
+  console.log(nextBtn.value)
+}
+// загатовочка, если не нажали вариант ответа
+function showAlert() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Something went wrong!',
+    footer: '<a href="">Why do I have this issue?</a>'
+  })
+}
 
 </script>
 
@@ -21,40 +49,53 @@ onMounted(() => {
 
       <div class="cost-calc__container">
         <!-- 1 карточка -->
-        <div class="cost-calc__container__block1">
+        <div v-for="item in questions" :key="item.id" class="cost-calc__container__block1">
           <div class="cost-calc__container__block1__content">
-            <p class="cost-calc__container__block1__content__question">
-              Вопрос 1 из 5
+            <p  class="cost-calc__container__block1__content__question">
+              Вопрос {{ item[count].id }} из 5
             </p>
             <div class="cost-calc__container__block1__content__progress-bar">
-              <div class="cost-calc__container__block1__content__progress-bar-line" :style="{'width': 20 + '%'}"></div>
+              <div 
+                class="cost-calc__container__block1__content__progress-bar-line" :style="{'width': item[count].width + '%'}"></div>
             </div>
             <p class="cost-calc__container__block1__content__title">
-              Количество гостей
+              {{ item[count].question }}
             </p>
             <div class="cost-calc__container__block1__content__opt">
-              <!-- ! for loop -->
-              <div class="form_radio">
-                <input id="radio-1" type="radio" name="answer" value="">
-                <label for="radio-1"> 15-30</label>
+              <div 
+                v-for="answer in questions.questions[count].options" 
+                :key="answer.id" 
+                class="form_radio">
+                  <input id="radio-1" type="radio" name="answer" value="">
+                  <label for="radio-1"> {{ answer }}</label>
               </div>
-              <div class="form_radio">
-                <input id="radio-2" type="radio" name="answer" value="">
-                <label for="radio-2"> 30-60</label>
-              </div>
-              <div class="form_radio">
-                <input id="radio-3" type="radio" name="answer" value="">
-                <label for="radio-3"> 60-80</label>
-              </div>
-              <div class="form_radio">
-                <input id="radio-4" type="radio" name="answer" value="">
-                <label for="radio-4"> 80-100</label>
-              </div>
-              <div class="form_radio">
-                <input id="radio-5" type="radio" name="answer" value="">
-                <label for="radio-5"> 100-120</label>
-              </div>  
+              
             </div>
+              <div class="cost-calc__container__block1__content__line"></div>
+              <!-- rewrite style to class -->
+              <div style="display:flex; gap: 10px">
+                <div 
+                  @click="visibleNextBtn"
+                  :class="{activeEl: nextBtn}"
+                  class="cost-calc__container__block1__content__btn1 btn-img-right">
+                  <p class="cost-calc__container__block1__content__btn1__text">
+                    Следующий вопрос
+                  </p>
+                </div>
+
+                <!-- Кнопка назад -->
+                <transition name="custom">
+                    <div 
+                      v-if="nextBtn" 
+                      class="btn-img-left cost-calc__container__block1__content__btn2 ">
+                        <p class="cost-calc__container__block1__content__btn2__text">
+                          Назад
+                        </p>
+                    </div>
+
+                  </transition>
+
+              </div>
           </div>
         </div>
         <!-- 2 карточка -->
@@ -127,7 +168,6 @@ onMounted(() => {
         }
 
         &__progress-bar-line {
-          // width: 20%;
           height: 4px;
           background-color: #C6AF66;
           transition: all .3s ease-in-out;
@@ -142,6 +182,68 @@ onMounted(() => {
         &__opt {
           display: flex;
           gap: 16px;
+          margin-bottom: 41px;
+        }
+
+        &__line {
+          margin-left: -41px;
+          width: 120%;
+          height: 1px;
+          background-color: #FFF;
+        }
+
+        &__btn1 {
+          display: inline-flex;
+          align-items: center;
+          width: 40%;
+          height: 52px;
+          margin-top: 31px;
+          padding: 14px 24px 14px 32px;
+          background-color: #C6AF66;
+          transition: all 1s;
+
+          &__text {
+            font-family: Roboto;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+            color: #FFF
+          }
+
+          &:hover {
+            cursor: pointer;
+            background-color: #ccb054;
+            transition: all 1s
+          }
+        }
+
+        &__btn2 {
+          display: inline-flex;
+          align-items: center;
+          order: -1;
+          width: 40%;
+          height: 52px;
+          margin-top: 31px;
+          padding: 14px 24px 14px 32px;
+          background-color: #c6af66b9;
+          transition: all 1s;
+
+          &__text {
+            font-family: Roboto;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+            color: #FFF;
+            padding-left: 100px;
+          }
+
+          &:hover {
+            cursor: pointer;
+            background-color: #ccb054;
+            transition: all 1s
+          }
         }
       }
     }
@@ -174,6 +276,17 @@ onMounted(() => {
       }
     }
   }
+}
+
+.btn-img-right {
+  background-image: url('/src/assets/icons/right-arrow.png');
+  background-repeat: no-repeat;
+  background-position: right 2.3em bottom 14px;
+}
+.btn-img-left {
+  background-image: url('/src/assets/icons/left-arrow.png');
+  background-repeat: no-repeat;
+  background-position: left 2.3em bottom 14px;
 }
 
 input[type='radio'],
@@ -228,10 +341,24 @@ input[type='radio']:checked::after {
 }
 .form_radio:hover {
   cursor: pointer;
-  border: 1px solid var(--ver-20, #C6AF66);
+  box-shadow: 0px 0px 0px 0.1em #c6af66b4
 }
 .form_radio.active {
-  border: 1px solid var(--ver-20, #C6AF66);
+  box-shadow: 0px 0px 0px 0.1em #C6AF66
+}
+
+.activeEl {
+  transform: translateX(20px);
+  transition: all 3s;
+}
+
+.custom-enter-active,
+.custom-leave-active {
+  transition: opacity 3s ease;
+}
+.custom-enter-from,
+.custom-leave-to {
+  opacity: 0;
 }
 
 
