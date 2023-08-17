@@ -1,42 +1,51 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, onUpdated, ref } from 'vue';
 import Swal from 'sweetalert2';
 
 import questions from '../questions.js'
 
-
 onMounted(() => {
+  choiceOpt();
+})
+
+onUpdated(() => {
+  choiceOpt();
+})
+
+function choiceOpt () {
   const radioBtns = document.querySelectorAll('input[name="answer"]');
   const parentElems = document.querySelectorAll('.form_radio');
+  const labelText = document.querySelectorAll('.inp_answer_text')
   
   radioBtns.forEach(function(elem) {
     elem.addEventListener('change', (elem) => {
       const el = elem.target.closest('.form_radio');
+      const elText = elem.target.nextSibling;
 
       parentElems.forEach(function(elem) {
         elem.classList.remove('active');
       })
-
-      el.classList.contains('active') ? 
-      el.classList.remove('active') : 
-      el.classList.add('active');
+      labelText.forEach(function(elem) {
+        elem.classList.remove('active');
+      })
+      // styles 
+      el.classList.contains('active') ? el.classList.remove('active') : el.classList.add('active');
+      elText.classList.contains('active') ? elText.classList.remove('active') : elText.classList.add('active');
     })
   })
-})
+}
 
 const nextBtn = ref(false);
 const count = ref(0)
 
 function visibleNextBtn() {
   nextBtn.value = true;
-  // write script if quiz will finished
   count.value <= 3 ? count.value ++ : ''; 
-  
 }
 
 function prevStepBtn() {
-  count.value !== 0 ? count.value -- : nextBtn.value = false; 
-  
+  count.value !== 0 ? count.value -- : '' ; 
+  count.value == 0 ? nextBtn.value = false : '' ;
 } 
 // загатовочка, если не нажали вариант ответа
 function showAlert() {
@@ -73,8 +82,8 @@ function showAlert() {
                 v-for="answer in questions.questions[count].options" 
                 :key="answer.id" 
                 class="form_radio">
-                  <input id="radio-1" type="radio" name="answer" value="">
-                  <label for="radio-1"> {{ answer }}</label>
+                  <input class="inp_answer" id="radio-1" type="radio" name="answer" value="">
+                  <label class="inp_answer_text" for="radio-1"> {{ answer }}</label>
               </div>
               
             </div>
@@ -289,7 +298,7 @@ function showAlert() {
 .btn-img-right {
   background-image: url('/src/assets/icons/right-arrow.png');
   background-repeat: no-repeat;
-  background-position: right 2.3em bottom 14px;
+  background-position: right 1.3em bottom 14px;
 }
 .btn-img-left {
   background-image: url('/src/assets/icons/left-arrow.png');
@@ -297,12 +306,15 @@ function showAlert() {
   background-position: left 2.3em bottom 14px;
 }
 
-input[type='radio'],
-label {
+.inp_answer_text{
   cursor: pointer;
-}
+  color: #63636F;
 
-input[type='radio'] {
+  &.active {
+    color: black
+  }
+}
+.inp_answer {
   position: relative;
   height: 22px;
   width: 22px;
@@ -310,32 +322,43 @@ input[type='radio'] {
   -moz-appearance: none;
   appearance: none;
   outline: none;
-}
 
-input[type='radio']::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 2px solid #C6AF66;
-}
-
-input[type='radio']:checked::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #C6AF66;
-  transform: translate(-50%, -50%);
-  visibility: visible;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 2px solid #ACADA5;
+  }
+  &:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 2px solid #C6AF66;
+  }
+  &:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #C6AF66;
+    transform: translate(-50%, -50%);
+    visibility: visible;
+  }
 }
 
 .form_radio {
@@ -346,13 +369,15 @@ input[type='radio']:checked::after {
   border-radius: 4px;
   background: #FFF;
   box-shadow: 0px 8px 16px 0px rgba(34, 35, 36, 0.10);
-}
-.form_radio:hover {
-  cursor: pointer;
-  box-shadow: 0px 0px 0px 0.1em #c6af66b4
-}
-.form_radio.active {
-  box-shadow: 0px 0px 0px 0.1em #C6AF66
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 0px 0.1em #c6af66b4
+  }
+  &.active {
+    cursor: pointer;
+    box-shadow: 0px 0px 0px 0.1em #C6AF66;
+  }
 }
 
 .activeEl {

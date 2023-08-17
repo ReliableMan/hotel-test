@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import CostCalculation from './Tabs_components/CostCalculation.vue';
+import HallShemes from './Tabs_components/HallShemes.vue';
 
 onMounted(() => {
   const tabsHref = document.querySelectorAll(".tabs__nav-btn");
@@ -44,6 +45,7 @@ onMounted(() => {
       <!-- 1 -->
       <div class="tabs__item active" id="tab_1">
         <CostCalculation/>
+        <HallShemes/>
       </div>
       <!-- 2 -->
       <div class="tabs__item" id="tab_2">
@@ -104,17 +106,17 @@ onMounted(() => {
     font-weight: 400;
     line-height: 28px;
     color: black;
-  }
 
-  &__nav-btn:hover {
-    background-size: 100% 2px;
-    color:#c6af66b7;
-    transition: all 1s;
-  }
-  &__nav-btn.active {
-    color: #C6AF66;
-    @extend .custom-underline;
-    background-size: 100% 2px;
+    &:hover {
+      background-size: 100% 2px;
+      color:#c6af66b7;
+      transition: all 1s;
+    }
+    &.active {
+      color: #C6AF66;
+      @extend .custom-underline;
+      background-size: 100% 2px;
+    }
   }
 
   &__content {
