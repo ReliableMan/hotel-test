@@ -48,7 +48,8 @@
 
 <style lang="scss" scoped>
 .footer {
-  bottom: calc(-57vh);
+  margin-top: 32px;
+  right: 0;
   position: absolute;
   width: 100%;
   height: 213px;

@@ -1,7 +1,13 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useMainStore } from '../store/index';
+
 import CostCalculation from './Tabs_components/CostCalculation.vue';
 import HallShemes from './Tabs_components/HallShemes.vue';
+import Modal from './Modal.vue'
+import Footer from './Footer.vue';
+
+const mainStore = useMainStore();
 
 onMounted(() => {
   const tabsHref = document.querySelectorAll(".tabs__nav-btn");
@@ -46,18 +52,28 @@ onMounted(() => {
       <div class="tabs__item active" id="tab_1">
         <CostCalculation/>
         <HallShemes/>
+          <Modal v-show="mainStore.modalActive">
+            <div class="modal-content">
+              <h3>This is a modal header</h3>
+              <p>this is a modal message</p>
+            </div>
+          </Modal>
+        <Footer/>
       </div>
       <!-- 2 -->
       <div class="tabs__item" id="tab_2">
         <h3>О нас</h3>
+        <!-- <Footer/> -->
       </div>
       <!-- 3 -->
       <div class="tabs__item" id="tab_3">
         <h3>Выездная регистрация</h3>
+        <!-- <Footer/> -->
       </div>
       <!-- 4 -->
       <div class="tabs__item" id="tab_4">
         <h3>Схемы залов</h3>
+        <!-- <Footer/> -->
       </div>
       <!-- 5 -->
       <div class="tabs__item" id="tab_5">
@@ -66,6 +82,7 @@ onMounted(() => {
       <!-- 6 -->
       <div class="tabs__item" id="tab_6">
         <h3>Галерея</h3>
+        <!-- <Footer/> -->
       </div>
       <!-- 7 -->
       <div class="tabs__item" id="tab_7">
@@ -74,6 +91,7 @@ onMounted(() => {
       <!-- 8 -->
       <div class="tabs__item" id="tab_8">
         <h3>Контакты</h3>
+        <!-- <Footer/> -->
       </div>
     </div>
   </div>
@@ -132,5 +150,13 @@ onMounted(() => {
   }
 }
 
+.modal-content {
+  width: 55vw;
+  // width: 842px; 
+  height: 328px;
+  border-radius: 16px;
+  background: #FFF;
+  box-shadow: 0px 8px 16px 0px rgba(34, 35, 36, 0.10); 
+}
 
 </style>

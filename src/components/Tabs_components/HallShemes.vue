@@ -1,5 +1,9 @@
 <script setup>
 import { onMounted } from 'vue';
+import { useMainStore } from '../../store/index';
+
+const mainStore = useMainStore();
+
 
 onMounted(() => {
   const hallsHref = document.querySelectorAll(".hall_schemes__nav-btn");
@@ -67,7 +71,7 @@ onMounted(() => {
         <div class="hall_schemes__item__container">
           <img
             class="hall_schemes__item__container__img-sitting" 
-            src="/src/assets/img/plan_sitting_people.svg" 
+            src="/src/assets/svg/plan_sitting_people.svg" 
             alt="image-plan-sitting-people"
           >
           <div class="hall_schemes__item__container__sm-window">
@@ -106,7 +110,7 @@ onMounted(() => {
 
 
             <div class="hall_schemes__item__container__sm-window__groupBtns">
-              <button class="hall_schemes__item__container__sm-window__groupBtns__btn-1">
+              <button @click="mainStore.changeModalActive" class="hall_schemes__item__container__sm-window__groupBtns__btn-1">
                 <p class="hall_schemes__item__container__sm-window__groupBtns__btn-1__text">
                   Забронировать
                 </p>
