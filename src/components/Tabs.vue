@@ -1,6 +1,8 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { useMainStore } from '../store/index';
+
+import { vMaska } from "maska"
 
 import CostCalculation from './Tabs_components/CostCalculation.vue';
 import HallShemes from './Tabs_components/HallShemes.vue';
@@ -8,6 +10,11 @@ import Modal from './Modal.vue'
 import Footer from './Footer.vue';
 
 const mainStore = useMainStore();
+
+const options = reactive({
+  mask: "+7 (###) ###-##-##",
+  eager: true
+})
 
 onMounted(() => {
   const tabsHref = document.querySelectorAll(".tabs__nav-btn");
@@ -32,6 +39,16 @@ onMounted(() => {
       }
     })
   })
+
+  const elem_btn = document.querySelector('.modal-content__container__block-2__btn-1');
+  const elem_text = document.querySelector('.modal-content__container__block-2__btn-1__text');
+
+  elem_btn.onmouseover = function() {
+    elem_text.style.color = '#C6AF66'
+  };
+  elem_btn.onmouseout = function() {
+    elem_text.style.color = ''
+  };
 })
 </script>
 
@@ -54,8 +71,53 @@ onMounted(() => {
         <HallShemes/>
           <Modal v-show="mainStore.modalActive">
             <div class="modal-content">
-              <h3>This is a modal header</h3>
-              <p>this is a modal message</p>
+              <div @click.stop="mainStore.changeModalActive" class="modal-content__close-svg"></div>
+              <div class="modal-content__container">
+                <div class="modal-content__container__block-1">
+                  <h3 class="modal-content__container__block-1__title">
+                    Оставьте заявку
+                  </h3>
+                  <p class="modal-content__container__block-1__subtitle">
+                    Скоро с вами свяжется администратор
+                  </p>
+                  <p class="modal-content__container__block-1__politics">
+                    Нажимая на кнопку "Отправить", Вы соглашаетесь <br/>c
+                    <a
+                      class="modal-content__container__block-1__politics-href" 
+                      href="#">Политикой конфиденциальности</a>
+                  </p>
+                </div>
+                <div class="modal-content__container__block-2">
+                  <!-- input for name -->
+                  <p class="modal-content__container__block-2__inp-text">
+                    Ваше имя
+                  </p>
+                  <input 
+                    class="modal-content__container__block-2__inp" 
+                    type="text" 
+                    placeholder="Иван"/>
+                  <!-- input for mobile phone -->
+                  <p class="modal-content__container__block-2__inp-text">
+                    Ваш номер телефона
+                  </p>
+                  <input 
+                    class="modal-content__container__block-2__inp"
+                    name="phone"
+                    id="phone"
+                    type="text" 
+                    v-maska:[options]
+                    placeholder="+7 (900) 000-00-00"
+                    v-model="mainStore.numberValue" 
+                    />
+
+                    <button @click="mainStore.changeModalActive" 
+                    class="modal-content__container__block-2__btn-1">
+                      <p class="modal-content__container__block-2__btn-1__text">
+                        Забронировать
+                      </p>
+                    </button>
+                </div>
+              </div>
             </div>
           </Modal>
         <Footer/>
@@ -98,6 +160,14 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
+
+.text-style-1 {
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px; 
+}
 
 .custom-underline {
   background-image: linear-gradient(currentColor, #C6AF66);
@@ -157,6 +227,118 @@ onMounted(() => {
   border-radius: 16px;
   background: #FFF;
   box-shadow: 0px 8px 16px 0px rgba(34, 35, 36, 0.10); 
+  position: relative;
+  
+  &__close-svg {
+    position: absolute;
+    background-image: url('../assets/svg/close_24px.svg');
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    top: 21px;
+    right: 20px;
+    cursor: pointer;
+    transition: transform 2s;
+    transform: rotate(-180deg);
+
+    &:hover {
+      transition: transform 2s;
+      transform: rotate(180deg)
+    }
+  }
+
+  &__container {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    gap: 100px;
+
+    &__block-1 {
+      margin-left: 40px;
+
+      &__title { 
+        color: #C6AF66;
+        font-family: P052;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 32px;
+      }
+
+      &__subtitle {
+        margin-top: 8px;
+        color: #ACADA5;
+        font-family: Lato;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 1px;
+      }
+
+      &__politics {
+        margin-top: 119px;
+        color: #ACADA5;
+        @extend .text-style-1; 
+      }
+
+      &__politics-href {
+        color: #ACADA5;
+      }
+    }
+
+    &__block-2 {
+    
+      &__inp-text {
+        color: #ACADA5;
+        @extend .text-style-1;
+        margin-bottom: 5px;
+      }
+
+      &__inp {
+        width: 15rem;
+        height: 52px;
+        border-radius: 4px;
+        background: #E9EAEC;
+        margin-bottom: 16px;
+        border: none;
+        padding: 16px;
+
+        &:focus {
+          outline: none;
+          box-shadow: 0px 0px 0px 0.1em #c6af66b4;
+        }
+      }
+
+      &__btn-1 {
+        padding: 14px 32px; 
+        height: 52px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        border-radius: 4px;
+        background-color: #C6AF66;
+        transition: all 1s;
+
+        &:hover {
+          cursor: pointer;
+          box-shadow: 0px 0px 0px 2px #C6AF66;
+          background-color: #FFF;
+          transition: all 1s;
+        }
+
+        &__text {
+          color:#FFF;
+          font-family: Roboto;
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+        }
+      }
+    }
+  }
 }
 
 </style>
