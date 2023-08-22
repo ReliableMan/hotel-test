@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive } from 'vue';
+import { onMounted, onUpdated, reactive } from 'vue';
 import { useMainStore } from '../store/index';
 
 import { vMaska } from "maska"
@@ -19,7 +19,7 @@ const options = reactive({
 onMounted(() => {
   const tabsHref = document.querySelectorAll(".tabs__nav-btn");
   const tabsItems = document.querySelectorAll(".tabs__item");
-
+  
   tabsHref.forEach(function(item) {
     item.addEventListener("click", () => {
       let currentBtn = item;
@@ -50,11 +50,12 @@ onMounted(() => {
     elem_text.style.color = ''
   };
 })
+
 </script>
 
 <template>
   <div class="tabs">
-    <div class="tabs__nav">
+    <div class="tabs__nav" :class="{forMobile: mainStore.menuActive}">
       <a href="#cost-calculation" class="tabs__nav-btn active" data-tab="#tab_1">Расчёт стоимости</a>
       <a href="#about" class="tabs__nav-btn" data-tab="#tab_2">О нас</a>
       <a href="#outside-registration" class="tabs__nav-btn" data-tab="#tab_3">Выездная регистрация</a>
@@ -181,6 +182,10 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     gap: 30px;
+
+    @media (max-width: 900px) {
+      display: none
+    }
   }
 
   &__nav-btn {
@@ -221,7 +226,7 @@ onMounted(() => {
 }
 
 .modal-content {
-  width: 55vw;
+  width: 50vw;
   // width: 842px; 
   height: 328px;
   border-radius: 16px;
@@ -339,6 +344,14 @@ onMounted(() => {
       }
     }
   }
+}
+
+.forMobile {
+  // display: block;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  gap: 50px;
 }
 
 </style>

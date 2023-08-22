@@ -1,10 +1,37 @@
 <script setup>
-import Tabs from './Tabs.vue'
+import { useMainStore } from '../store/index';
+const mainStore = useMainStore();
+
+import Tabs from './Tabs.vue';
+import Swal from 'sweetalert2';
+
+function showAlert() {
+  Swal.fire({
+    icon: 'success',
+    title: 'Спасибо за обращение',
+    text: 'Наш менеджер свяжется с вами в ближайшее время!',
+    footer: 
+    `<a 
+    style="text-decoration-line: none;
+    color: #C6AF66; font-family: 'Roboto', sans-serif; 
+    font-size: 18px; line-height: 20px" 
+    href="tel:+7123456789">
+    Позвонить сейчас
+    </a>`
+  })
+}
 </script>
 
 <template>
   <div class="container">
     <div class="header">
+
+      <div @click="mainStore.changeMenuActive" class="header__menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
       <div class="header__logo">
         <img
           class="logo-img" 
@@ -46,6 +73,10 @@ import Tabs from './Tabs.vue'
               </a>
             </div>
 
+            <div @click="showAlert" class="header__info-btn">
+              <p class="header__info-btn__text">Перезвоните</p>
+            </div>
+
           </div>
           
           <Tabs/>
@@ -61,6 +92,19 @@ import Tabs from './Tabs.vue'
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(16px);
+  transition: all 0.5s;
+
+
+  @media (max-width: 900px) {
+    transition: all 0.5s;
+    height: 120px; 
+  }
+
+  @media (max-width: 600px) {
+    transition: all 0.5s;
+    height: 90px; 
+    border-radius: 0px;
+  }
 }
 
 .text-style-1 {
@@ -73,6 +117,15 @@ import Tabs from './Tabs.vue'
 .header {
   margin: 12px 166px 40px 167px;
   display: flex;
+  
+  @media (max-width: 900px) {
+    margin: 12px 0px 40px 60px;
+  }
+
+  @media (max-width: 700px) {
+    margin: 12px 0px 40px 20px;
+  }
+
 
   &__logo {
     width: 50%
@@ -82,6 +135,10 @@ import Tabs from './Tabs.vue'
     display: flex;
     align-items: center;
     gap: 16px;
+
+    @media (max-width: 900px) {
+      display: none
+    }
   }
 
   &__location-img {
@@ -99,18 +156,88 @@ import Tabs from './Tabs.vue'
     display: flex;
     align-items: center;
     gap: 8px;
+
+    @media (max-width: 700px) {
+      display: none
+    }
   }
 
   &__info {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @media (max-width: 600px) {
+      display: none
+    }
+  }
+
+  &__info-btn {
+    display: none;
+
+    @media (max-width: 600px) {
+      display: inline-flex;
+      padding: 8px 16px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px; 
+      border-radius: 4px; 
+      background:#C6AF66;
+      cursor: pointer
+    }
+
+    &__text {
+      color:#FFF;
+      font-family: Roboto;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+    }
+  }
+
+  &__menu-btn {
+    display: none;
+
+    @media (max-width: 900px) { 
+      margin-top: 5px;
+      margin-right: 16px;
+      display:block;
+      width: 30px;
+      height: 30px;
+      position: relative;
+      z-index:2;
+      overflow: hidden;
+      cursor: pointer;
+
+    span {
+      width: 24px;
+      height: 2px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #C6AF66;
+      transition: all 0.5s;
+    }
+    span:nth-of-type(2) {
+      top: calc(50% - 5px)
+    }
+    span:nth-of-type(3) {
+      top: calc(50% + 5px)
+    }
+   }
   }
 }
 
 .logo-img {
   width: 109px;
   height: 56px;
+
+  @media (max-width: 800px) {
+    width: 78.887px;
+    height: 40px; 
+   }
 }
 .icons-img {
   width: 48px;
@@ -122,6 +249,15 @@ import Tabs from './Tabs.vue'
 }
 .number-href {
   margin-left: 37px;
+  color:  #C6AF66;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  text-decoration-line: underline;
+}
+.number-href-sweetalert {
   color:  #C6AF66;
   font-family: 'Roboto', sans-serif;
   font-size: 15px;

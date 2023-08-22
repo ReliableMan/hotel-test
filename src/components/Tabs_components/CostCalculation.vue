@@ -153,6 +153,10 @@ function showAlert() {
     font-weight: 700;
     line-height: 48px;
     margin-bottom: 13px;
+
+    @media (max-width: 900px) {
+      margin-top: 100px;
+    }
   }
 
   &__container {
