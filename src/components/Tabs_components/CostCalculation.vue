@@ -50,16 +50,13 @@ function prevStepBtn() {
   count.value !== 0 ? count.value -- : '' ; 
   count.value == 0 ? nextBtn.value = false : '' ;
 } 
-// загатовочка, если не нажали вариант ответа
-function showAlert() {
-  Swal.fire({
-    icon: 'error',
-    title: 'Oops...',
-    text: 'Something went wrong!',
-    footer: '<a href="">Why do I have this issue?</a>'
-  })
-}
 
+function sendRequest () {
+  // here will be request to the server
+    mainStore.showAlert2();
+    count.value = 0;
+    nextBtn.value = false;
+}
 </script>
 
 <template>
@@ -114,7 +111,7 @@ function showAlert() {
                 <button 
                   v-if="item[count].id === 5"
                   type="button" 
-                  @click="mainStore.showAlert2"
+                  @click="sendRequest"
                   :class="{activeEl: nextBtn}"
                   class=" cost-calc__container__block1__content__send ">
                   <p class="cost-calc__container__block1__content__send__text">
