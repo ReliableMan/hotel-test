@@ -41,16 +41,6 @@ onMounted(() => {
       }
     })
   })
-
-  const elem_btn = document.querySelector('.modal-content__container__block-2__btn-1');
-  const elem_text = document.querySelector('.modal-content__container__block-2__btn-1__text');
-
-  elem_btn.onmouseover = function() {
-    elem_text.style.color = '#C6AF66'
-  };
-  elem_btn.onmouseout = function() {
-    elem_text.style.color = ''
-  };
 })
 
 </script>
@@ -84,7 +74,7 @@ onMounted(() => {
                     Скоро с вами свяжется администратор
                   </p>
                   <p class="modal-content__container__block-1__politics">
-                    Нажимая на кнопку "Отправить", Вы соглашаетесь <br/>c
+                    Нажимая на кнопку "Забронировать", Вы соглашаетесь <br/>c
                     <a
                       class="modal-content__container__block-1__politics-href" 
                       href="#">Политикой конфиденциальности</a>
@@ -112,6 +102,13 @@ onMounted(() => {
                     placeholder="+7 (900) 000-00-00"
                     v-model="mainStore.numberValue" 
                     />
+
+                    <!-- for screen size from 700px -->
+                    <p class="modal-content__container__block-2__politics">
+                    Нажимая на кнопку "Забронировать", Вы <br/> соглашаетесь c
+                      <a class="modal-content__container__block-2__politics-href" 
+                         href="#">Политикой конфиденциальности</a>
+                    </p>
 
                     <button @click="mainStore.changeModalActive" 
                     class="modal-content__container__block-2__btn-1">
@@ -268,6 +265,14 @@ onMounted(() => {
   @media (max-width: 800px) {
     width: 40rem;
   }
+  @media (max-width: 700px) {
+    width: 25rem;
+    height: 428px;
+  }
+  @media (max-width: 500px) {
+    width: 22rem;
+    height: 428px;
+  }
   
   &__close-svg {
     position: absolute;
@@ -297,6 +302,10 @@ onMounted(() => {
       gap: 20px;
     }
 
+    @media (max-width: 700px) {
+      flex-direction: column;
+    }
+
     &__block-1 {
       margin-left: 40px;
 
@@ -324,6 +333,10 @@ onMounted(() => {
         margin-top: 119px;
         color: #ACADA5;
         @extend .text-style-1; 
+
+        @media (max-width: 700px) {
+          display: none
+        }
       }
 
       &__politics-href {
@@ -332,7 +345,11 @@ onMounted(() => {
     }
 
     &__block-2 {
-    
+      
+      @media (max-width: 700px) {
+        margin-left: 40px;
+      }
+
       &__inp-text {
         color: #ACADA5;
         @extend .text-style-1;
@@ -354,6 +371,16 @@ onMounted(() => {
         }
       }
 
+      &__politics {
+        color: #ACADA5;
+        @extend .text-style-1; 
+        margin-bottom: 15px;
+      }
+
+      &__politics-href {
+        color: #ACADA5;
+      }
+
       &__btn-1 {
         padding: 14px 32px; 
         height: 52px;
@@ -370,6 +397,10 @@ onMounted(() => {
           box-shadow: 0px 0px 0px 2px #C6AF66;
           background-color: #FFF;
           transition: all 1s;
+        }
+
+        &:hover > &__text {
+          color: #C6AF66;
         }
 
         &__text {

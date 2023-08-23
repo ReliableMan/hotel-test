@@ -4,7 +4,6 @@ import { useMainStore } from '../../store/index';
 
 const mainStore = useMainStore();
 
-
 onMounted(() => {
   const hallsHref = document.querySelectorAll(".hall_schemes__nav-btn");
   const hallsItems = document.querySelectorAll(".hall_schemes__item");
@@ -28,27 +27,6 @@ onMounted(() => {
       }
     })
   })
-
-  const elem_btn = document.querySelector('.hall_schemes__item__container__sm-window__groupBtns__btn-1');
-  const elem_text = document.querySelector('.hall_schemes__item__container__sm-window__groupBtns__btn-1__text');
-
-  elem_btn.onmouseover = function() {
-    elem_text.style.color = '#C6AF66'
-  };
-  elem_btn.onmouseout = function() {
-    elem_text.style.color = ''
-  };
-
-  const elem_btn2 = document.querySelector('.hall_schemes__item__container__sm-window__groupBtns__btn-2');
-  const elem_text2 = document.querySelector('.hall_schemes__item__container__sm-window__groupBtns__btn-2__text');
-
-  elem_btn2.onmouseover = function() {
-    elem_text2.style.color = '#FFF'
-  };
-  elem_btn2.onmouseout = function() {
-    elem_text2.style.color = ''
-  };
-
 })
 
 </script>
@@ -153,6 +131,10 @@ onMounted(() => {
     height: 1101px
   }
 
+  @media (max-width: 500px) {
+    height: 700px;
+  }
+
   &__title {
     margin-top: 32px;
     margin-bottom: 16px;
@@ -161,11 +143,22 @@ onMounted(() => {
     font-style: normal;
     font-weight: 700;
     line-height: 48px;
+
+    @media (max-width: 500px) {
+      text-align: center;
+      font-size: 20px; 
+      line-height: 28px;
+    }
   }
 
   &__nav {
     display: inline-flex;
     gap: 2px;
+
+    @media (max-width: 500px) {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   &__nav-btn {
@@ -205,10 +198,15 @@ onMounted(() => {
 
       @media (max-width: 1200px) {
         height: 1001px;
-        width: 90%;
         display: flex;
         flex-direction: column;
         align-items: center;
+      }
+
+      @media(max-width: 500px) {
+        height: 651px;
+        width: 100%;
+        justify-content:unset;
       }
 
       &__img-sitting {
@@ -218,6 +216,11 @@ onMounted(() => {
 
         @media (max-width: 1200px) {
           margin: 12px 0 11px 0%;
+        }
+        @media (max-width: 500px) {
+          width: 119px;
+          height: 208px;
+          margin-bottom: 16px;
         }
       }
 
@@ -234,6 +237,16 @@ onMounted(() => {
           margin: 0px 0px 56px 0;
         }
 
+        @media (max-width: 700px) {
+          width: 432px
+        }
+
+        @media (max-width: 500px) {
+          width: 95%;
+          height: 360px;
+          padding: 24px 16px 0 16px
+        }
+
         &__text {
           font-family: P052;
           font-size: 32px;
@@ -241,6 +254,11 @@ onMounted(() => {
           font-weight: 700;
           line-height: 32px;
           margin-bottom: 24px;
+
+          @media (max-width: 500px) {
+            font-size: 20px;
+            line-height: 28px;
+          }
         }
 
         &__info-1 {
@@ -251,10 +269,22 @@ onMounted(() => {
             width: 10rem;
             @extend .text-style-1;
             color: #ACADA5;
+
+            @media (max-width: 500px) {
+              width: 50%;
+              font-size: 14px;
+              line-height: 20px; 
+            }
           }
           &__text-2 {
             @extend .text-style-1;
             color: #18191B;
+
+            @media (max-width: 500px) {
+              width: 50%;
+              font-size: 14px;
+              line-height: 20px; 
+            }
           }
         }
 
@@ -270,6 +300,11 @@ onMounted(() => {
           margin-top: 32px;
           display: flex;
           gap: 16px;
+
+          @media (max-width: 500px) {
+            margin-top: 24px;
+            flex-direction:column
+          }
 
           &__btn-1 {
             padding: 14px 32px; 
@@ -287,6 +322,10 @@ onMounted(() => {
               box-shadow: 0px 0px 0px 2px #C6AF66;
               background-color: #FFF;
               transition: all 1s;
+            }
+
+            &:hover > &__text {
+              color: #C6AF66;
             }
 
             &__text {
@@ -315,6 +354,10 @@ onMounted(() => {
               background-color: #C6AF66;
               transition: all 1s;
               color: #fff;
+            }
+
+            &:hover > &__text {
+              color: #FFF
             }
 
             &__text {

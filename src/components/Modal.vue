@@ -34,6 +34,12 @@ const mainStore = useMainStore();
   @media (max-width: 1200px) {
     height: 245vh
   }
+  @media (max-width: 600px) {
+    height: 200vh
+  }
+  @media (max-width: 500px) {
+    height: 165vh
+  }
  }
  .modal-inner {
   margin: auto;

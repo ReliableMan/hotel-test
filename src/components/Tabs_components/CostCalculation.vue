@@ -7,7 +7,6 @@ import questions from '../questions.js'
 
 const mainStore = useMainStore();
 
-
 onMounted(() => {
   choiceOpt();
 })
@@ -102,28 +101,27 @@ function showAlert() {
               <div class="cost-calc__container__block1__content__line"></div>
               <!-- rewrite style to class -->
               <div style="display:flex; gap: 10px">
-                <div 
+                <button
+                  type="button" 
                   @click="visibleNextBtn"
                   :class="{activeEl: nextBtn}"
                   class="btn-img-right cost-calc__container__block1__content__btn1 ">
                   <p class="cost-calc__container__block1__content__btn1__text">
                     Следующий вопрос
                   </p>
-                </div>
-
+                </button>
                 <!-- Кнопка назад -->
                 <transition name="custom">
-                    <div 
+                    <button 
+                      type="button" 
                       @click="prevStepBtn"
                       v-if="nextBtn" 
                       class="btn-img-left cost-calc__container__block1__content__btn2 ">
                         <p class="cost-calc__container__block1__content__btn2__text">
                           Назад
                         </p>
-                    </div>
-
+                    </button>
                   </transition>
-
               </div>
           </div>
         </div>
@@ -190,7 +188,6 @@ function showAlert() {
       padding-left: 26px;
       margin-bottom: 0;
     }
-
   }
   
   &__main-sb-text-mob {
@@ -226,9 +223,8 @@ function showAlert() {
       background: #F7F7F8;
 
       @media (min-width: 600px) and (max-width: 1200px) {
-        width: 80%;
+        width: 100%;
       }
-      // !!! toggle class
       @media (max-width: 599px) {
        width: 100%;
       }
@@ -308,9 +304,12 @@ function showAlert() {
           width: 40%;
           height: 52px;
           margin-top: 31px;
+          border-radius: 4px;
           padding: 14px 24px 14px 32px;
           background-color: #C6AF66;
           transition: all 1s;
+          outline: none;
+          border: none;
 
           @media (max-width: 1400px) {
             margin-top: 10px;
@@ -318,6 +317,7 @@ function showAlert() {
           @media (max-width: 500px) {
             padding: 14px 24px 14px 8px;
             margin-top: 24px;
+            width: 200px;
           }
 
           &__text {
@@ -346,6 +346,8 @@ function showAlert() {
           padding: 14px 24px 14px 32px;
           background-color: #c6af66b9;
           transition: all 1s;
+          outline: none;
+          border: none;
 
           @media (max-width: 1400px) {
             margin-top: 10px;
@@ -367,7 +369,6 @@ function showAlert() {
             @media (max-width: 700px) {
               padding-left: 70px;
             }
-
             @media (max-width: 450px) {
               padding-left: 80px;
             }
@@ -390,9 +391,8 @@ function showAlert() {
       position: relative;
 
       @media (min-width: 600px) and (max-width: 1200px) {
-        width: 80%;
+        width: 100%;
       }
-
       @media (max-width: 599px) {
         width: 100%;
         height: 295px; 
@@ -434,8 +434,6 @@ function showAlert() {
         @media (max-width: 599px) {
           position: absolute;
           display: inline-flex;
-          // justify-content: center;
-          // align-items: center;
           width: 150px;
           height: 52px;
           top: 73%;
@@ -474,7 +472,7 @@ function showAlert() {
 .btn-img-right {
   background-image: url('/src/assets/icons/right-arrow.png');
   background-repeat: no-repeat;
-  background-position: right 1.3em bottom 14px;
+  background-position: right 1.1em bottom 14px;
 }
 .btn-img-left {
   background-image: url('/src/assets/icons/left-arrow.png');
@@ -491,7 +489,6 @@ function showAlert() {
     font-size: 14px; 
     line-height: 20px;
   }
-
   &.active {
     color: black
   }
@@ -542,7 +539,6 @@ function showAlert() {
     visibility: visible;
   }
 }
-
 .form_radio {
   display: flex;
   align-items: center;
@@ -561,12 +557,10 @@ function showAlert() {
     box-shadow: 0px 0px 0px 0.1em #C6AF66;
   }
 }
-
 .activeEl {
   transform: translateX(20px);
   transition: all 3s;
 }
-
 .custom-enter-active,
 .custom-leave-active {
   transition: opacity 3s ease;
@@ -575,12 +569,9 @@ function showAlert() {
 .custom-leave-to {
   opacity: 0;
 }
-
 .hiddenForMobile {
-
   @media (max-width: 599px) {
     display: none
   }
 }
-
 </style>

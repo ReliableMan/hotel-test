@@ -56,14 +56,36 @@
   border-radius: 20px 20px 0px 0px;
   background: #424343; 
 
+  @media (max-width: 500px) {
+    height: 328px; 
+  }
+
   &__content {
     display: flex;
     justify-content: space-between;
     padding: 64px 166px 80px 166px;
 
+    @media (max-width: 1200px) {
+      display: flex;
+      justify-content: space-around;
+      padding: 64px 0px 80px 0px;
+      align-items: center;
+    }
+    @media (max-width: 500px) {
+      flex-direction: column;
+      padding-top: 40px;
+      padding-left: 36px;
+      align-items: unset;
+
+    }
+
     &__img-logo {
       width: 109px;
       height: 56px;
+
+      @media (max-width: 500px) {
+        margin-bottom: 40px;
+      }
     }
 
     &__social {
@@ -110,6 +132,18 @@
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
+
+    @media (max-width: 1200px) {
+      left: 15%
+    }
+    @media (max-width: 1000px) {
+      left: 12%
+    }
+
+    @media (max-width: 500px) {
+      top: 90%;
+      left: 36px
+    }
   }
 }
 
