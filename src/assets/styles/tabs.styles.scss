@@ -217,9 +217,18 @@
       }
 
       &__politics {
-        color: #ACADA5;
-        @extend .text-style-1; 
-        margin-bottom: 15px;
+        display: none;
+        
+        @media (max-width: 700px) {
+          display: block;
+          color: #ACADA5;
+          font-family: Roboto;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 15px; 
+          margin-bottom: 15px;
+        }
       }
 
       &__politics-href {

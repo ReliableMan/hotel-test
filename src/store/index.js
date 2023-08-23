@@ -19,7 +19,6 @@ export const useMainStore = defineStore("mainStore", () => {
 
   function changeStartQuiz () {
     startQuiz.value = !startQuiz.value;
-    console.log('-=-=-=-', startQuiz.value)
   }
 
   function showAlert() {
