@@ -74,7 +74,7 @@ function showAlert() {
             </div>
 
             <div @click="showAlert" class="header__info-btn">
-              <p class="header__info-btn__text">Перезвоните</p>
+              <p class="header__info-btn__text">Позвонить</p>
             </div>
 
           </div>
@@ -102,7 +102,7 @@ function showAlert() {
 
   @media (max-width: 600px) {
     transition: all 0.5s;
-    height: 90px; 
+    height: 80px; 
     border-radius: 0px;
   }
 }

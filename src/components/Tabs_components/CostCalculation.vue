@@ -1,8 +1,12 @@
 <script setup>
 import { onMounted, onUpdated, ref } from 'vue';
-import Swal from 'sweetalert2';
+import { useMainStore } from '../../store';
 
+import Swal from 'sweetalert2';
 import questions from '../questions.js'
+
+const mainStore = useMainStore();
+
 
 onMounted(() => {
   choiceOpt();
@@ -69,7 +73,11 @@ function showAlert() {
 
       <div class="cost-calc__container">
         <!-- 1 карточка -->
-        <div v-for="item in questions" :key="item.id" class="cost-calc__container__block1">
+        <div 
+        v-for="item in questions" 
+        :key="item.id" 
+        class="cost-calc__container__block1"
+        :class="{hiddenForMobile: !mainStore.startQuiz}">
           <div class="cost-calc__container__block1__content">
             <p  class="cost-calc__container__block1__content__question">
               Вопрос {{ item[count].id }} из 5
@@ -120,7 +128,7 @@ function showAlert() {
           </div>
         </div>
         <!-- 2 карточка -->
-        <div class="cost-calc__container__block2">
+        <div :class="{hiddenForMobile: mainStore.startQuiz}" class="cost-calc__container__block2">
           <img
             class="cost-calc__container__block2__bg-img" 
             src="../../assets/img/background2card.png" 
@@ -136,7 +144,7 @@ function showAlert() {
             из шампанского в подарок
           </p>
 
-          <button class=" btn-img-right cost-calc__container__block2__btn-start">
+          <button @click="mainStore.changeStartQuiz" class=" btn-img-right cost-calc__container__block2__btn-start">
             <p class="cost-calc__container__block2__btn-start__text-mob">Начать</p>
           </button>
         </div>
@@ -151,6 +159,13 @@ function showAlert() {
   font-style: normal;
   font-weight: 400;
   line-height: 32px;
+}
+.text-style-2 {
+  font-family: Lato;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; 
 }
 .cost-calc {
 
@@ -215,11 +230,15 @@ function showAlert() {
       }
       // !!! toggle class
       @media (max-width: 599px) {
-       display: none 
+       width: 100%;
       }
 
       &__content {
         padding: 32px 0 0 40px;
+
+        @media (max-width: 599px) {
+          padding: 16px 0 0 29px;
+        }
         
         &__question {
           font-family: 'Lato', sans-serif;
@@ -228,6 +247,12 @@ function showAlert() {
           font-weight: 400;
           line-height: 28px;
           margin-bottom: 8px;
+
+          @media (max-width: 599px) {
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 16px;
+          }
         }
 
         &__progress-bar {
@@ -246,6 +271,13 @@ function showAlert() {
           @extend .text-style-1;
           margin-top: 32px;
           margin-bottom: 24px;
+
+          @media (max-width: 599px) {
+            font-size: 16px;
+            line-height: 28px;
+            margin-top: 24px;
+            margin-bottom: 16px;
+          }
         }
 
         &__opt {
@@ -257,6 +289,9 @@ function showAlert() {
             display: flex;
             flex-wrap: wrap;
             margin-bottom: 10px
+          }
+          @media (max-width: 500px) {
+            margin-bottom: 25px
           }
         }
 
@@ -278,7 +313,11 @@ function showAlert() {
           transition: all 1s;
 
           @media (max-width: 1400px) {
-            margin-top: 21px;
+            margin-top: 10px;
+          }
+          @media (max-width: 500px) {
+            padding: 14px 24px 14px 8px;
+            margin-top: 24px;
           }
 
           &__text {
@@ -309,11 +348,11 @@ function showAlert() {
           transition: all 1s;
 
           @media (max-width: 1400px) {
-            margin-top: 21px;
+            margin-top: 10px;
           }
-
-          @media (max-width: 1300px) {
-            padding: 14px 24px 14px 0px;
+          @media (max-width: 500px) {
+            padding: 14px 24px 14px 8px;
+            margin-top: 24px;
           }
 
           &__text {
@@ -324,6 +363,14 @@ function showAlert() {
             line-height: 20px;
             color: #FFF;
             padding-left: 100px;
+
+            @media (max-width: 700px) {
+              padding-left: 70px;
+            }
+
+            @media (max-width: 450px) {
+              padding-left: 80px;
+            }
           }
 
           &:hover {
@@ -436,8 +483,14 @@ function showAlert() {
 }
 
 .inp_answer_text{
+  @extend .text-style-2 ;
   cursor: pointer;
   color: #63636F;
+
+  @media (max-width: 599px) {
+    font-size: 14px; 
+    line-height: 20px;
+  }
 
   &.active {
     color: black
@@ -523,5 +576,11 @@ function showAlert() {
   opacity: 0;
 }
 
+.hiddenForMobile {
+
+  @media (max-width: 599px) {
+    display: none
+  }
+}
 
 </style>
