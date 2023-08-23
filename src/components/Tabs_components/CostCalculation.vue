@@ -61,7 +61,11 @@ function showAlert() {
 
 <template>
   <div class="cost-calc">
-    <h3 class="cost-calc__main-sb-text">Рассчитайте стоимость вашего банкета</h3>
+    <h3 class="cost-calc__main-sb-text">Рассчитайте стоимость вашего<br/> банкета</h3>
+    <p class="cost-calc__main-sb-text-mob">
+       Ответьте на 5 вопросов и получите горку<br/>
+       из шампанского в подарок 
+    </p>
 
       <div class="cost-calc__container">
         <!-- 1 карточка -->
@@ -93,7 +97,7 @@ function showAlert() {
                 <div 
                   @click="visibleNextBtn"
                   :class="{activeEl: nextBtn}"
-                  class="cost-calc__container__block1__content__btn1 btn-img-right">
+                  class="btn-img-right cost-calc__container__block1__content__btn1 ">
                   <p class="cost-calc__container__block1__content__btn1__text">
                     Следующий вопрос
                   </p>
@@ -128,9 +132,13 @@ function showAlert() {
             alt=""
           >
           <p class="cost-calc__container__block2__text">
-            Ответьте на 5 вопросов и получите горку<br/>
+            Ответьте на 5 вопросов и получите горку
             из шампанского в подарок
           </p>
+
+          <button class=" btn-img-right cost-calc__container__block2__btn-start">
+            <p class="cost-calc__container__block2__btn-start__text-mob">Начать</p>
+          </button>
         </div>
       </div>
   </div>
@@ -157,6 +165,33 @@ function showAlert() {
     @media (max-width: 900px) {
       margin-top: 100px;
     }
+    @media (max-width: 600px) {
+      margin-top: 54px;
+      font-size: 20px;
+      line-height: 28px;
+    }
+
+    @media (max-width: 600px) {
+      padding-left: 26px;
+      margin-bottom: 0;
+    }
+
+  }
+  
+  &__main-sb-text-mob {
+    display: none;
+
+    @media (max-width: 600px) {
+      display: block;
+      font-family: Lato;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      color: #63636F;
+      padding-left: 26px;
+      margin-bottom: 16px;
+    }
   }
 
   &__container {
@@ -164,11 +199,24 @@ function showAlert() {
     display: flex;
     gap: 20px;
 
+    @media (max-width: 1200px) {
+      display: flex;
+      flex-direction: column;
+    }
+
     &__block1 {
       width: 55%;
       height: 369px;
       border-radius: 16px;
       background: #F7F7F8;
+
+      @media (min-width: 600px) and (max-width: 1200px) {
+        width: 80%;
+      }
+      // !!! toggle class
+      @media (max-width: 599px) {
+       display: none 
+      }
 
       &__content {
         padding: 32px 0 0 40px;
@@ -204,6 +252,12 @@ function showAlert() {
           display: flex;
           gap: 16px;
           margin-bottom: 41px;
+          
+          @media (max-width: 1430px) {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px
+          }
         }
 
         &__line {
@@ -223,13 +277,17 @@ function showAlert() {
           background-color: #C6AF66;
           transition: all 1s;
 
+          @media (max-width: 1400px) {
+            margin-top: 21px;
+          }
+
           &__text {
             font-family: Roboto;
             font-size: 15px;
             font-style: normal;
             font-weight: 400;
             line-height: 20px;
-            color: #FFF
+            color: #FFF;
           }
 
           &:hover {
@@ -250,6 +308,14 @@ function showAlert() {
           background-color: #c6af66b9;
           transition: all 1s;
 
+          @media (max-width: 1400px) {
+            margin-top: 21px;
+          }
+
+          @media (max-width: 1300px) {
+            padding: 14px 24px 14px 0px;
+          }
+
           &__text {
             font-family: Roboto;
             font-size: 15px;
@@ -263,7 +329,7 @@ function showAlert() {
           &:hover {
             cursor: pointer;
             background-color: #ccb054;
-            transition: all 1s
+            transition: all 1s;
           }
         }
       }
@@ -276,6 +342,15 @@ function showAlert() {
       background: #F7F7F8;
       position: relative;
 
+      @media (min-width: 600px) and (max-width: 1200px) {
+        width: 80%;
+      }
+
+      @media (max-width: 599px) {
+        width: 100%;
+        height: 295px; 
+      }
+
       &__bg-img {
         width: 100%;
         height: 100%;
@@ -287,13 +362,63 @@ function showAlert() {
         width: 100%;
         height: 392px;
         top: -23px;
+
+        @media (max-width: 599px) {
+          height: 318px;
+          top: -23px;
+        }
       }
 
       &__text {
         position: absolute;
         top: 73%;
         left: 6%;
+        width: 80%;
         @extend .text-style-1;
+
+        @media (max-width: 599px) {
+          display: none
+       }
+      }
+
+      &__btn-start {
+        display: none;
+
+        @media (max-width: 599px) {
+          position: absolute;
+          display: inline-flex;
+          // justify-content: center;
+          // align-items: center;
+          width: 150px;
+          height: 52px;
+          top: 73%;
+          left: 6%;
+          border-radius: 4px; 
+          padding: 15px 32px; 
+          border: none;
+          background-color: #C6AF66;
+          transition: all 1s;
+
+        &:hover {
+          cursor: pointer;
+          box-shadow: 0px 0px 0px 2px #C6AF66;
+          background-color: #c6af662a;
+          transition: all 1s;
+        }
+
+        &:hover > &__text-mob {
+          color: #C6AF66;
+        }
+
+        &__text-mob {
+          color:#FFF;
+          font-family: Roboto;
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          }
+        }
       }
     }
   }

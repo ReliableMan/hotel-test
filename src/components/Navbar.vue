@@ -115,7 +115,7 @@ function showAlert() {
   line-height: 24px;
 }
 .header {
-  margin: 12px 166px 40px 167px;
+  margin: 12px 166px 32px 167px;
   display: flex;
   
   @media (max-width: 900px) {

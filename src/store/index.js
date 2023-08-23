@@ -13,7 +13,6 @@ export const useMainStore = defineStore("mainStore", () => {
 
   const changeMenuActive = function toggleMenu () {
     menuActive.value = !menuActive.value;
-    console.log('value', menuActive.value)
   }
 
   return {

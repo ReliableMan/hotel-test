@@ -20,17 +20,20 @@ const mainStore = useMainStore();
 
 <style lang="scss" scoped>
  .modal {
-  height: 80vh;
+  height: 160vh;
   width: 100vw;
-  top: 80%;
+  top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   background: #18191bf3;
   position: absolute;
-  transform: translate(0%, 50%);
   z-index: 2;
   display: flex;
+
+  @media (max-width: 1200px) {
+    height: 245vh
+  }
  }
  .modal-inner {
   margin: auto;

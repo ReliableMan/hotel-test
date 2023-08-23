@@ -36,6 +36,8 @@ onMounted(() => {
         
         currentBtn.classList.add('active');
         currentTab.classList.add('active');
+
+        mainStore.menuActive = false 
       }
     })
   })
@@ -182,9 +184,11 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     gap: 30px;
+    transition: all 1s;
 
     @media (max-width: 900px) {
-      display: none
+      display: none;
+      transition: all 1s;
     }
   }
 
@@ -199,6 +203,7 @@ onMounted(() => {
     font-weight: 400;
     line-height: 28px;
     color: black;
+    padding-bottom: 10px;
 
     &:hover {
       background-size: 100% 2px;
@@ -214,6 +219,32 @@ onMounted(() => {
 
   &__content {
     margin: 24px 166px 0 166px;
+    transition: all 1s;
+
+    @media (max-width: 1400px) {
+      margin: 24px 106px 0 156px;
+      transition: all 1s;
+    }
+    @media (max-width: 1300px) {
+      margin: 24px 76px 0 156px;
+      transition: all 1s;
+    }
+    @media (max-width: 1200px) {
+      margin: 24px 56px 0 116px;
+      transition: all 1s;
+    }
+    @media (max-width: 1100px) {
+      margin: 24px 46px 0 86px;
+      transition: all 1s;
+    }
+    @media (max-width: 1000px) {
+      margin: 24px 26px 0 56px;
+      transition: all 1s;
+    }
+    @media (max-width: 600px) {
+      margin: 0;
+      transition: all 1s;
+    }
   }
 
   &__item {
@@ -226,13 +257,17 @@ onMounted(() => {
 }
 
 .modal-content {
-  width: 50vw;
+  width: 47rem;
   // width: 842px; 
   height: 328px;
   border-radius: 16px;
   background: #FFF;
   box-shadow: 0px 8px 16px 0px rgba(34, 35, 36, 0.10); 
   position: relative;
+
+  @media (max-width: 800px) {
+    width: 40rem;
+  }
   
   &__close-svg {
     position: absolute;
@@ -257,6 +292,10 @@ onMounted(() => {
     width: 100%;
     display: flex;
     gap: 100px;
+
+    @media (max-width: 800px) {
+      gap: 20px;
+    }
 
     &__block-1 {
       margin-left: 40px;
@@ -351,7 +390,10 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   // justify-content: center;
-  gap: 50px;
+  gap: 10px;
+  width: 50%;
+  padding-left: 20px;
+  transition: all 1s;
 }
 
 </style>

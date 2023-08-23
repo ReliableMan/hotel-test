@@ -149,6 +149,10 @@ onMounted(() => {
 
 .hall_schemes {
 
+  @media (max-width: 1200px) {
+    height: 1101px
+  }
+
   &__title {
     margin-top: 32px;
     margin-bottom: 16px;
@@ -199,10 +203,22 @@ onMounted(() => {
       display: flex;
       justify-content: space-between;
 
+      @media (max-width: 1200px) {
+        height: 1001px;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
       &__img-sitting {
         width: 267px;
         height: 469px;
         margin: 12px 0 11px 15%;
+
+        @media (max-width: 1200px) {
+          margin: 12px 0 11px 0%;
+        }
       }
 
       &__sm-window {
@@ -213,6 +229,10 @@ onMounted(() => {
         background: #FFF;
         box-shadow: 0px 8px 16px 0px rgba(34, 35, 36, 0.10);
         padding: 40px 40px 32px 40px;
+
+        @media (max-width: 1200px) {
+          margin: 0px 0px 56px 0;
+        }
 
         &__text {
           font-family: P052;
