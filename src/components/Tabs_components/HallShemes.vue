@@ -30,7 +30,6 @@ onMounted(() => {
 })
 
 </script>
-
 <template>
   <div class="hall_schemes">
 
