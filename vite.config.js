@@ -13,5 +13,5 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['vue3-tabs-component']
   },
-  base: '/deploying-hotel-test-project',
+  base: '/hotel-test-project/',
 })
