@@ -119,6 +119,11 @@
     width: 22rem;
     height: 428px;
   }
+  @media (max-width: 350px) {
+    transform: translateY(5rem);
+    width: 22rem;
+    height: 450px;
+  }
   
   &__close-svg {
     position: absolute;
