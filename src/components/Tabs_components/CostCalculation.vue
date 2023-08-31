@@ -2,7 +2,6 @@
 import { onMounted, onUpdated, ref } from 'vue';
 import { useMainStore } from '../../store';
 
-import Swal from 'sweetalert2';
 import questions from '../questions.js'
 
 const mainStore = useMainStore();
@@ -12,8 +11,22 @@ onMounted(() => {
 })
 
 onUpdated(() => {
-  choiceOpt();
+  // choiceOpt();
+  resetStyles()
+  // console.log('updated')
 })
+ 
+function resetStyles () {
+  const parentElems = document.querySelectorAll('.form_radio');
+  const labelText = document.querySelectorAll('.inp_answer_text')
+    parentElems.forEach(function(elem) {
+      elem.classList.remove('active');
+    })
+    labelText.forEach(function(elem) {
+      elem.classList.remove('active');
+    })
+}
+
 
 function choiceOpt () {
   const radioBtns = document.querySelectorAll('input[name="answer"]');
@@ -22,6 +35,7 @@ function choiceOpt () {
   
   radioBtns.forEach(function(elem) {
     elem.addEventListener('change', (elem) => {
+      console.log('change')
       const el = elem.target.closest('.form_radio');
       const elText = elem.target.nextSibling;
 
@@ -40,23 +54,59 @@ function choiceOpt () {
 
 const nextBtn = ref(false);
 const count = ref(0)
+const answerArr = ref([])
+// const el = ref([])
 
 function visibleNextBtn() {
+  // should clear all inputs
+  resetCheckbox ()
+
   nextBtn.value = true;
   count.value <= 3 ? count.value ++ : ''; 
 }
 
 function prevStepBtn() {
+  resetCheckbox ()
+
   count.value !== 0 ? count.value -- : '' ; 
   count.value == 0 ? nextBtn.value = false : '' ;
 } 
 
 function sendRequest () {
   // here will be request to the server
+  resetCheckbox ()
+  console.log('results', answerArr.value)
     mainStore.showAlert2();
     count.value = 0;
     nextBtn.value = false;
 }
+
+function resetCheckbox () {
+  const radioBtns = document.querySelectorAll('input[name="answer"]');
+  radioBtns.forEach(el => el.checked = false);
+}
+
+
+function saveResult(answer) {
+
+  // если юзер нажал другой вариант, то делать перезапись результата, а потом пушить
+  // let info = document.querySelector('#radio-inp');
+
+  let extraElem = answerArr.value.map(el => el.id);
+  
+  if(!extraElem.includes(count.value)) {
+    answerArr.value.push({id: count.value, result:answer});
+  } else {
+    answerArr.value.pop();
+    answerArr.value.push({id: count.value, result:answer});
+  }
+
+  // console.log('value', answer);
+  // console.log('count', count.value)
+
+  console.log('answerArr.value', answerArr.value)
+}
+
 </script>
 
 <template>
@@ -87,11 +137,11 @@ function sendRequest () {
             </p>
             <div class="cost-calc__container__block1__content__opt">
               <div 
-                v-for="answer in questions.questions[count].options" 
-                :key="answer.id" 
+                v-for="answer in questions.questions[count].options"
+                :key="answer.id"
                 class="form_radio">
-                  <input class="inp_answer" id="radio-1" type="radio" name="answer" value="">
-                  <label class="inp_answer_text" for="radio-1"> {{ answer }}</label>
+                  <input @click="saveResult(answer)" class="inp_answer" id="radio-inp" type="radio" name="answer" :value="answer">
+                  <label class="inp_answer_text" for="radio-inp"> {{ answer }}</label>
               </div>
               
             </div>
